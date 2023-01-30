@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import AddTodo from "../AddTodo/AddTodo";
 
-let num = 124;
-const TodoList = ({ list }) => {
+const TodoList = () => {
   const [todos, setTodos] = useState([
     { id: "123", text: "장보기", status: "active" },
     { id: "124", text: "공부하기", status: "active" },
   ]);
 
-  useEffect(() => {
-    if (list.length !== 0) {
-      num++;
-      const newList = { id: `${num}`, text: list, status: "active" };
-      setTodos([...todos, newList]);
-    }
-  }, [list]);
+  const handleAdd = (todo) => setTodos([...todos, todo]);
+
   return (
     <section>
       <ul>
@@ -21,6 +16,7 @@ const TodoList = ({ list }) => {
           <li key={item.id}>{item.text}</li>
         ))}
       </ul>
+      <AddTodo onAdd={handleAdd} />
     </section>
   );
 };
